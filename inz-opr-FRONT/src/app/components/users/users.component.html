@@ -1,0 +1,20 @@
+<form class="well" (submit)="addUser($event)">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name...">
+      <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email...">    
+    </div>  
+</form>
+
+<div class="user-list">
+  <div *ngFor="let user of users">
+      <div class="col-md-7">
+          {{user.name}}
+          <br>
+          {{user.email}}    
+      </div> 
+      <div class="col-md-4">
+          <input type="button" (click)="deleteUser(user._id)" value="Delete" class="btn btn-danger">    
+      </div>
+      <br><br>
+  </div>
+</div>
