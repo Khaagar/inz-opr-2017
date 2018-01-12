@@ -21,19 +21,16 @@ export class UsersComponent {
             });
     }
     
-    addUser(event){
-        event.preventDefault();
+    addUser(name,email){
+        console.log(name,email)
+    
         var newUser = {
-            name: this.name,
-            email: this.email
+            name: name,
+            email: email
         }
-        
+        console.log(newUser);
         this.userService.addUser(newUser)
-            .subscribe(user => {
-                this.users.push(user);
-                this.name = '';
-                this.email= '';
-            });
+            
     }
     
     deleteUser(id){

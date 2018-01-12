@@ -1,8 +1,9 @@
-<form class="well" (submit)="addUser($event)">
-    <div class="form-group">
+<form class="well">
+    <form class="form-group">
       <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name...">
-      <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email...">    
-    </div>  
+      <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."> 
+      <button type="submit" (click)="addUser(name,email)"class="btn btn-primary text-uppercase">Dodaj</button>   
+    </form>  
 </form>
 
 <div class="user-list">

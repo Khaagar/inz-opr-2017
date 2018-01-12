@@ -27,7 +27,8 @@ router.get('/user/:id', function(req, res, next){
 //Save Task
 router.post('/user', function(req, res, next){
     var user = req.body;
-    if(!user.title || !(user.isDone + '')){
+    console.log(req.body);
+    if(!user.name || !(user.email)){
         res.status(400);
         res.json({
             "error": "Bad Data"

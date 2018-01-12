@@ -16,8 +16,8 @@ export class UserService{
     addUser(newUser){
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/api/user', JSON.stringify(newUser), {headers: headers})
-            .map(res => res.json());
+        return this.http.post('http://localhost:3000/api/user',JSON.stringify(newUser), {headers:headers} )
+            .subscribe()
     }
     
     deleteUser(id){
