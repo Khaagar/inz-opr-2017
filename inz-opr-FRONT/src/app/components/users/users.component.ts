@@ -1,4 +1,7 @@
-import { User } from './../../../User';
+import { SportsFieldService } from './../../services/sportsfield.service';
+import { ReservationService } from './../../services/reservation.service';
+import { ObjectService } from './../../services/object.service';
+import { User } from './../../../models/User';
 
 import { Component } from '@angular/core';
 import {UserService} from '../../services/user.service';
@@ -13,6 +16,16 @@ export class UsersComponent {
     users: User[];
     name: string;
     email: string;
+    password: string;
+    reservation_ids: string[];
+    user = {
+        _id:'',
+        name:'',
+        email:'',
+        password:'',
+        reservation_ids:[]
+        }
+    
     
     constructor(private userService:UserService){
         this.userService.getUsers()
@@ -21,15 +34,9 @@ export class UsersComponent {
             });
     }
     
-    addUser(name,email){
-        console.log(name,email)
-    
-        var newUser = {
-            name: name,
-            email: email
-        }
-        console.log(newUser);
-        this.userService.addUser(newUser)
+    addUser(user){
+        console.log(user);
+        this.userService.addUser(user);
             
     }
     
@@ -47,11 +54,21 @@ export class UsersComponent {
         });
     }
     
+    sendToInput(user){
+        this.user = {
+            _id:user._id,
+            name: user.name,
+            email: user.email,
+            password:user.password,
+            reservation_ids:user.reservation_ids,
+        }
+    }
     updateStatus(user){
         var _user = {
             _id:user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            password:user.password
         };
         
         this.userService.updateStatus(_user).subscribe(data => {

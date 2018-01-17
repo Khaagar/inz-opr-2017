@@ -14,7 +14,7 @@ router.get('/users', function(req, res, next){
     });
 });
 
-// Get Single Task
+// Get Single user
 router.get('/user/:id', function(req, res, next){
     db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
         if(err){
@@ -24,11 +24,23 @@ router.get('/user/:id', function(req, res, next){
     });
 });
 
+
+// Get Single user
+router.get('/user/:id/name', function(req, res, next){
+    db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
+        if(err){
+            res.send(err);
+        }
+        res.json(user.name);
+    });
+});
+
+
 //Save Task
 router.post('/user', function(req, res, next){
     var user = req.body;
     console.log(req.body);
-    if(!user.name || !(user.email)){
+    if(!user.name || !(user.email) || !(user.password)){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -42,6 +54,8 @@ router.post('/user', function(req, res, next){
         });
     }
 });
+
+
 
 // Delete Task
 router.delete('/user/:id', function(req, res, next){
@@ -64,6 +78,10 @@ router.put('/user/:id', function(req, res, next){
     
     if(user.email){
         updUser.email = user.email;
+    }
+
+    if(user.password){
+        updUser.password = user.password;
     }
     
     if(!updUser){

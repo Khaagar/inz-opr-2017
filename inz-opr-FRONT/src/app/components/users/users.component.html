@@ -1,8 +1,10 @@
 <form class="well">
     <form class="form-group">
-      <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name...">
-      <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."> 
-      <button type="submit" (click)="addUser(name,email)"class="btn btn-primary text-uppercase">Dodaj</button>   
+      <input type="text" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Add name...">
+      <input type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Add email..."> 
+      <input type="text" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Add password...">
+      <button type="submit" (click)="addUser(user)"class="btn btn-primary text-uppercase">Dodaj</button> 
+      <button type="submit" (click)="updateStatus(user)"class="btn btn-primary text-uppercase">Zaktualizuj</button>         
     </form>  
 </form>
 
@@ -11,10 +13,14 @@
       <div class="col-md-7">
           {{user.name}}
           <br>
-          {{user.email}}    
+          {{user.email}} 
+          <br>
+          {{user.password}}
       </div> 
       <div class="col-md-4">
-          <input type="button" (click)="deleteUser(user._id)" value="Delete" class="btn btn-danger">    
+          <input type="button" (click)="deleteUser(user._id)" value="Delete" class="btn btn-danger">
+          <input type="button" (click)="sendToInput(user)" value="Update" class="btn btn-primary">    
+         
       </div>
       <br><br>
   </div>
