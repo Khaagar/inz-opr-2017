@@ -13,6 +13,7 @@ import {UserService} from '../../services/user.service';
 })
 
 export class UsersComponent { 
+    
     users: User[];
     name: string;
     email: string;
@@ -23,7 +24,6 @@ export class UsersComponent {
         name:'',
         email:'',
         password:'',
-        reservation_ids:[]
         }
     
     
@@ -59,8 +59,7 @@ export class UsersComponent {
             _id:user._id,
             name: user.name,
             email: user.email,
-            password:user.password,
-            reservation_ids:user.reservation_ids,
+            password:user.password
         }
     }
     updateStatus(user){

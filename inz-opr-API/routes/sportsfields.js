@@ -40,7 +40,7 @@ router.get('/sportsfield/:id', function(req, res, next){
 router.post('/sportsfield', function(req, res, next){
     var sportsfield = req.body;
     console.log(req.body);
-    if(!sportsfield.name || !(sportsfield.objectId)){
+    if(!sportsfield.name || !(sportsfield.objectId) || !(sportsfield.dates)){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -79,6 +79,10 @@ router.put('/sportsfields/:id', function(req, res, next){
 
     if(sportsfield.objectId){
         updSportsfields.objectId = sportsfield.objectId;
+    }
+
+    if(sportsfield.dates){
+        updSportsfields.dates = sportsfield.dates;
     }
     
     if(!updSportsfields){

@@ -24,6 +24,27 @@ router.get('/user/:id', function(req, res, next){
     });
 });
 
+router.get('/user/find/:name/:password', function(req, res, next){
+    db.users.findOne({name: req.params.name}, function(err, user){
+        if(user){
+            if(user.password === req.params.password)
+            {
+                res.json(user);
+            }
+            else {
+                res.json('podane haslo jest bledne');
+            }
+        }
+        else {res.json('uzytkownik nie istnieje');}
+        
+    });
+});
+
+// router.get('/user/findbyusername/:username', function(req, res, next){
+//     var user = db.users.findOne({username: req.params.username});
+//     res.json(user);
+// });
+
 
 // Get Single user
 router.get('/user/:id/name', function(req, res, next){
@@ -40,7 +61,7 @@ router.get('/user/:id/name', function(req, res, next){
 router.post('/user', function(req, res, next){
     var user = req.body;
     console.log(req.body);
-    if(!user.name || !(user.email) || !(user.password)){
+    if(!user.name || !(user.email) || !(user.password) || !(user.surname) || !(user.phone)){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -67,6 +88,7 @@ router.delete('/user/:id', function(req, res, next){
     });
 });
 
+
 // Update Task
 router.put('/user/:id', function(req, res, next){
     var user = req.body;
@@ -76,12 +98,24 @@ router.put('/user/:id', function(req, res, next){
         updUser.name = user.name;
     }
     
+    if(user.surname){
+        updUser.surname = user.surname;
+    }
+
     if(user.email){
         updUser.email = user.email;
     }
 
     if(user.password){
         updUser.password = user.password;
+    }
+
+    if(user.phone){
+        updUser.phone = user.phone;
+    }
+
+    if(user.isAdmin){
+        updUser.isAdmin = user.isAdmin;
     }
     
     if(!updUser){

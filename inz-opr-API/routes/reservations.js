@@ -40,7 +40,7 @@ router.get('/reservation/:id/name', function(req, res, next){
 router.post('/reservation', function(req, res, next){
     var reservation = req.body;
     console.log(req.body);
-    if(!reservation.objectId || !(reservation.sportsfieldId) || !(reservation.dateDay) || !(reservation.dateHourStart) || !(reservation.dateHourEnd)){
+    if(!reservation.objectId || !(reservation.sportsfieldId) || !(reservation.dateDay) || !(reservation.dateHourStart) || !(reservation.dateHourEnd) || !(reservation.userId)){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -74,6 +74,10 @@ router.put('/reservation/:id', function(req, res, next){
     
     if(reservation.objectId){
         updreservation.objectId = reservation.objectId;
+    }
+
+    if(reservation.userId){
+        updreservation.userId = reservation.userId;
     }
     
     if(reservation.sportsfieldId){

@@ -40,7 +40,7 @@ router.get('/object/:id/name', function(req, res, next){
 router.post('/object', function(req, res, next){
     var object = req.body;
     console.log(req.body);
-    if(!object.name){
+    if(!object.name || !(object.dates)){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -74,6 +74,10 @@ router.put('/object/:id', function(req, res, next){
     
     if(object.name){
         updObject.name = object.name;
+    }
+
+    if(object.dates){
+        updObject.dates = object.dates;
     }
     
     if(!updObject){
