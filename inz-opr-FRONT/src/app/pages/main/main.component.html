@@ -89,3 +89,36 @@
 
   </div>
 </div>
+
+<div class="container">
+  <h1>MyUserList</h1>
+  <hr>
+  <div><app-login></app-login></div>
+  <users></users>
+</div>
+
+
+<div class="row">
+  <div class="col-md-8">
+    <ul class="list-group">
+  <li *ngFor="let item of data"class="list-group-item">
+    <div class="row">
+      <div class="col-md-2">{{item.id}}</div>
+      <div class="col-md-8"> {{item.name}} </div> 
+      <div class="col-md-2">
+        <button class="btn btn-danger" (click)="deleteFromList(item)">X</button>
+        </div>
+        </div> </li>
+
+</ul>
+  </div>
+  <div class="col-md-2">
+
+
+    <label for="newItem">To Do</label>
+    <input type="text" class="form-control" id="newItem" placeholder="What's up?" #name>
+
+  <button class="btn btn-primary" (click)="addToList(name.value)">Add to list</button>
+
+  </div>
+</div>
