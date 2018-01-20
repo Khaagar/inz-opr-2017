@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['objects']);
+var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['objects','sportsfields']);
 
 
 // Get All Users
@@ -16,13 +16,23 @@ router.get('/objects', function(req, res, next){
 
 // Get Single user
 router.get('/object/:id', function(req, res, next){
+    //var object=req.body;
     db.objects.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, object){
         if(err){
             res.send(err);
         }
-        res.json(object);
+        
+      
+       db.sportsfields.find({objectId:req.params.id},function(err,sportsfield){
+           console.log(sportsfield);
+           object.sportsfields=sportsfield;
+           console.log(object);
+           res.json(object);
+       });
+        
     });
 });
+
 
 
 // Get Single object
