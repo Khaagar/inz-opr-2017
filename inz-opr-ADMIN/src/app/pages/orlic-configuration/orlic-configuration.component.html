@@ -1,0 +1,64 @@
+<div class="row py-5">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">NAZWA ORLIKA</th>
+              <th scope="col">EDYTUJ</th>
+              <th scope="col">USUŃ</th>
+              <th scope="col"><button class="btn btn-info" data-toggle="modal" data-target="#addOrlikModal">DODAJ ORLIK</button></th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <ng-template ngFor let-orlik [ngForOf]="orliks" let-i="index">
+            <tr>
+              <th scope="row">{{i+1}}</th>
+              <td>{{orlik.name}}</td>
+              <td><button class="btn btn-primary" (click)="toggleEdition()" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">EDYTUJ ORLIK</button></td>
+              <td><button class="btn btn-danger" (click)="usunOrlik(orlik._id)">USUŃ ORLIK</button></td>
+            </tr>
+            <tr>
+                <td colspan="4" scope="row" class="p-0 w-100">
+                    <div class="collapse" [id]="'collapse'+i">
+                        <form class="p-2 pl-5" >
+                          <div class="form-group">
+                            <label [for]="'nameInput'+i">Nazwa Orlika</label>
+                            <input type="email" class="form-control" [(ngModel)]="orlik.name" [ngModelOptions]="{standalone: true}" [id]="'nameInput'+i" aria-describedby="emailHelp" placeholder="Nazwa Orlika">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                          </div>
+                          <button type="submit" class="btn btn-success" (click)="aktualizujOrlik(orlik)" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">ZAPISZ</button>
+                        </form>
+                      </div>
+                </td>
+              </tr>
+              </ng-template>
+          </tbody>
+        </table>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addOrlikModal" tabindex="-1" role="dialog" aria-labelledby="addOrlikModalLabel" aria-hidden="true">
+    <div  class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addOrlikModalLabel">Dodaj orlik</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form class="form-group">
+                  <input type="text" [(ngModel)]="orlik.name" name="name" class="form-control" placeholder="Add name...">
+                </form>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">ZAMKNIJ</button>
+            <button type="button" class="btn btn-primary" (click)="dodajOrlik(orlik)" data-dismiss="modal">DODAJ</button>
+          </div>
+        </div>
+      </div>
+  </div>
