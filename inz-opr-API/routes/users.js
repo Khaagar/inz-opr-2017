@@ -29,16 +29,23 @@ router.get('/user/find/:name/:password', function(req, res, next){
         if(user){
             if(user.password === req.params.password)
             {
-                res.json(user);
+                res.json({
+                    type:object,
+                    object:user});
             }
             else {
-                res.json('podane haslo jest bledne');
+                res.json({
+                    type:error,
+                    object:'podane haslo jest bledne'});
             }
         }
-        else {res.json('uzytkownik nie istnieje');}
+        else {res.json({
+            type:object,
+            object:'uzytkownik nie istnieje'});}
         
     });
 });
+
 
 // router.get('/user/findbyusername/:username', function(req, res, next){
 //     var user = db.users.findOne({username: req.params.username});
@@ -67,11 +74,25 @@ router.post('/user', function(req, res, next){
             "error": "Bad Data"
         });
     } else {
-        db.users.save(user, function(err, user){
-            if(err){
-                res.send(err);
+        var wynik=true;
+        db.users.findOne({name: req.params.name}, function(err, founduser){
+            console.log(founduser);
+            if(founduser){
+                res.json({
+                    "error": "istnieje uzytkownik o podanym loginie"});
+                    wynik=false;
             }
-            res.json(user);
+                
+            if(wynik) {
+                db.users.save(user, function(err, user){
+                    if(err){
+                        res.send(err);
+                    }
+                    res.json(user);
+                });
+            }
+            
+            
         });
     }
 });

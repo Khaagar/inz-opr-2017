@@ -40,7 +40,7 @@ router.get('/reservation/:id/name', function(req, res, next){
 router.post('/reservation', function(req, res, next){
     var reservation = req.body;
     console.log(req.body);
-    if(!reservation.objectId || !(reservation.sportsfieldId) || !(reservation.dateDay) || !(reservation.dateHourStart) || !(reservation.dateHourEnd) || !(reservation.userId)){
+    if(!(reservation.sportsfieldId) || !(reservation.dateDay) || !(reservation.dateHourStart) || !(reservation.dateHourEnd) || !(reservation.userId)){
         res.status(400);
         res.json({
             "error": "Bad Data"

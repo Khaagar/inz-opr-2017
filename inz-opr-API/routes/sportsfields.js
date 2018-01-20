@@ -1,12 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['sportsfields']);
+var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['sportsfields','reservations','sportsfieldsTypes']);
 
 
 // Get All Users
 router.get('/sportsfields', function(req, res, next){
     db.sportsfields.find(function(err, sportsfields){
+        if(err){
+            res.send(err);
+        }
+        res.json(sportsfields);
+    });
+});
+
+router.get('/sportsfields/types', function(req, res, next){
+    db.sportsfieldsTypes.find( function(err, sportsfields){
         if(err){
             res.send(err);
         }
@@ -20,7 +29,12 @@ router.get('/sportsfield/:id', function(req, res, next){
         if(err){
             res.send(err);
         }
-        res.json(sportsfield);
+        db.reservations.find({sportsfieldId:req.params.id},function(err,reservation){
+            console.log(reservation);
+            sportsfield.reservations=reservation;
+            console.log(sportsfield);
+            res.json(sportsfield);
+        });
     });
 });
 
