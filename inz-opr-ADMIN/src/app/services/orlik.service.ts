@@ -36,4 +36,11 @@ updateStatus(orlik){
       .map(res => res.json());
 }
 
+getSportfieldsTypes(){
+  return this.http.get('http://localhost:3000/api/sportsfields/types')
+  .map(res=>{
+    return res.json();
+  })
+}
+
 }

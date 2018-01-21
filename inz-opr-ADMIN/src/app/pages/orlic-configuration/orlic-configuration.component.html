@@ -18,7 +18,7 @@
             <tr>
               <th scope="row">{{i+1}}</th>
               <td>{{orlik.name}}</td>
-              <td><button class="btn btn-primary" (click)="toggleEdition()" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">EDYTUJ ORLIK</button></td>
+              <td><button class="btn btn-primary" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">EDYTUJ ORLIK</button></td>
               <td><button class="btn btn-danger" (click)="usunOrlik(orlik._id)">USUŃ ORLIK</button></td>
             </tr>
             <tr>
@@ -30,8 +30,24 @@
                             <input type="email" class="form-control" [(ngModel)]="orlik.name" [ngModelOptions]="{standalone: true}" [id]="'nameInput'+i" aria-describedby="emailHelp" placeholder="Nazwa Orlika">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                           </div>
-                          <button type="submit" class="btn btn-success" (click)="aktualizujOrlik(orlik)" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">ZAPISZ</button>
                         </form>
+                        <div class="row">
+                          <div class="col-md-6">
+                              <h5>Przypisane boiska</h5>
+                              <ul class="list-group w-100">
+                                <li *ngFor="let boisko of orlik.sportsfields" class="list-group-item clearfix"><span class="float-left">{{boisko["display-name"]}}</span><button class="btn btn-sm btn-danger float-right" (click)="usunBoiskoDoOrlika(orlik,boisko)">-</button></li>
+      
+                              </ul>
+                          </div>
+                          <div class="col-md-6">
+                            <h5>Dostępne boiska</h5>
+                            <ul class="list-group w-100">
+                              <li *ngFor="let type of typyBoisk" class="list-group-item clearfix"><span class="float-left">{{type["display-name"]}}</span><button class="btn btn-sm btn-success float-right" (click)="dodajBoiskoDoOrlika(orlik,type)">+</button></li>
+    
+                            </ul>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" (click)="aktualizujOrlik(orlik)" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">ZAPISZ</button>
                       </div>
                 </td>
               </tr>

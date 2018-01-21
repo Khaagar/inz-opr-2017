@@ -11,20 +11,34 @@ export class OrlicConfigurationComponent implements OnInit {
 
   orliks: any;
   orlik = {};
-  
+  typyBoisk: any;
   constructor(private orlikService: OrlikService) { }
 
   ngOnInit() {
     this.getOrliks();
+    this.getBoiska();
   }
   getOrliks() {
     this.orlikService.getAllOrliks()
       .subscribe(orliks => {
         this.orliks = orliks;
+        this.orliks.forEach(element => {
+          if(!element.sportsfields){
+            element.sportsfields = [];
+
+          }
+        });
       })
   }
+  
+  getBoiska(){
+    this.orlikService.getSportfieldsTypes()
+      .subscribe(types => {
+        this.typyBoisk = types;
+      })
+  }
+
   usunOrlik(id) {
-    console.log(id);
     this.orlikService.deleteOrlik(id)
       .subscribe(data => {
         this.getOrliks();
@@ -33,7 +47,6 @@ export class OrlicConfigurationComponent implements OnInit {
   }
 
   dodajOrlik() {
-    console.log(this.orlik);
     this.orlikService.addOrlik(this.orlik);
     this.orlik = {};
     var vm = this;
@@ -48,4 +61,15 @@ export class OrlicConfigurationComponent implements OnInit {
       this.getOrliks();
     })
   }
+  
+  dodajBoiskoDoOrlika(orlik,type){
+    let index = this.orliks.findIndex(x=>x._id===orlik._id);
+    this.orliks[index].sportsfields.push(type);
+  }
+
+  usunBoiskoDoOrlika(orlik,type){
+    let index = this.orliks.findIndex(x=>x._id===orlik._id);
+    this.orliks[index].sportsfields.splice(this.orliks[index].sportsfields.findIndex(x=>x._id===type._id),1);
+  }
+
 }
