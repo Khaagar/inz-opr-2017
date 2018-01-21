@@ -7,53 +7,56 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">NAZWA ORLIKA</th>
-              <th scope="col">EDYTUJ</th>
-              <th scope="col">USUŃ</th>
-              <th scope="col"><button class="btn btn-info" data-toggle="modal" data-target="#addOrlikModal">DODAJ ORLIK</button></th>
+              <th colspan="3"scope="col">NAZWA ORLIKA</th>
+
+              <th scope="col"><button class="btn btn-info" data-toggle="modal" data-target="#addOrlikModal"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
             </tr>
           </thead>
           <tbody id="table-body">
             <ng-template ngFor let-orlik [ngForOf]="orliks" let-i="index">
             <tr>
               <th scope="row">{{i+1}}</th>
-              <td>{{orlik.name}}</td>
-              <td><button class="btn btn-primary" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">EDYTUJ ORLIK</button></td>
-              <td><button class="btn btn-danger" (click)="usunOrlik(orlik._id)">USUŃ ORLIK</button></td>
+              <td class="w-50">{{orlik.name}}</td>
+              <td><button class="btn btn-primary" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i"><i class="fa fa-edit fa-pull-right" aria-hidden="true"></i>EDYTUJ </button></td>
+              <td><button class="btn btn-danger" (click)="usunOrlik(orlik._id)"><i class="fa fa-trash-alt fa-pull-right" aria-hidden="true"></i>USUŃ </button></td>
             </tr>
             <tr>
                 <td colspan="4" scope="row" class="p-0 w-100">
-                    <div class="collapse" [id]="'collapse'+i">
+                    <div class="collapse p-2" [id]="'collapse'+i">
                         <form class="p-2 pl-5" >
                           <div class="form-group">
                             <label [for]="'nameInput'+i">Nazwa Orlika</label>
-                            <input type="email" class="form-control" [(ngModel)]="orlik.name" [ngModelOptions]="{standalone: true}" [id]="'nameInput'+i" aria-describedby="emailHelp" placeholder="Nazwa Orlika">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input type="text" class="form-control" [(ngModel)]="orlik.name" [ngModelOptions]="{standalone: true}" [id]="'nameInput'+i" aria-describedby="emailHelp" placeholder="Nazwa Orlika">
                           </div>
                         </form>
                         <div class="row">
                           <div class="col-md-6">
                               <h5>Przypisane boiska</h5>
                               <ul class="list-group w-100">
-                                <li *ngFor="let boisko of orlik.sportsfields" class="list-group-item clearfix"><span class="float-left">{{boisko["display-name"]}}</span><button class="btn btn-sm btn-danger float-right" (click)="usunBoiskoDoOrlika(orlik,boisko)">-</button></li>
+                                <li *ngFor="let boisko of orlik.sportsfields" class="list-group-item clearfix"><span class="float-left">{{boisko["display-name"]}}</span><button class="btn btn-sm btn-danger float-right" (click)="usunBoiskoDoOrlika(orlik,boisko)"><i class="fa fa-minus" aria-hidden="true"></i></button></li>
       
                               </ul>
                           </div>
                           <div class="col-md-6">
                             <h5>Dostępne boiska</h5>
                             <ul class="list-group w-100">
-                              <li *ngFor="let type of typyBoisk" class="list-group-item clearfix"><span class="float-left">{{type["display-name"]}}</span><button class="btn btn-sm btn-success float-right" (click)="dodajBoiskoDoOrlika(orlik,type)">+</button></li>
+                              <li *ngFor="let type of typyBoisk" class="list-group-item clearfix"><span class="float-left">{{type["display-name"]}}</span><button class="btn btn-sm btn-success float-right" (click)="dodajBoiskoDoOrlika(orlik,type)"><i class="fa fa-plus" aria-hidden="true"></i></button></li>
     
                             </ul>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-success" (click)="aktualizujOrlik(orlik)" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i">ZAPISZ</button>
+                        <button type="submit" class="btn btn-success" (click)="aktualizujOrlik(orlik)" data-toggle="collapse" [attr.data-target]="'#collapse'+i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse'+i"><i class="fa fa-save fa-pull-right" aria-hidden="true"></i>ZAPISZ </button>
                       </div>
                 </td>
               </tr>
               </ng-template>
           </tbody>
         </table>
+        <div *ngIf="!orliks" class="row">
+          <div class="col text-center p-5">
+            <i class="text-info fas fa-spinner fa-spin fa-5x"></i>
+          </div>
+        </div>
   </div>
 </div>
 <!-- Modal -->
