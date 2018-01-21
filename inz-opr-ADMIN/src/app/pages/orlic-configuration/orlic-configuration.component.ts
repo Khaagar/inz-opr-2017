@@ -82,8 +82,16 @@ export class OrlicConfigurationComponent implements OnInit {
     console.log('TYP BOISKA ',type );
     
     this.orlikService.addSportsfieldToObject(id,type)
-      .subscribe(data=>
-        console.log(data));
+      .subscribe(data=>{
+        console.log('data',data);
+        var index = this.orliks.findIndex(x=>x._id === id);
+        var orlik = this.orliks[index];
+        orlik.sportsfields.push(data);
+        console.log(orlik);
+        
+        this.orlikService.updateStatus(orlik);
+      });
+
   }
 
   usunBoiskoDoOrlika(orlik,type){

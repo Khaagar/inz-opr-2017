@@ -136,12 +136,6 @@ router.put('/object/:id/sportsfields', function(req, res, next){
             }
         res.json(sportsfield);
         });
-        db.objects.update({_id: mongojs.ObjectId(req.params.objectId)},{$push:{sportsfields:sportsfield}}, function(err, object){
-        if(err){
-            res.send(err);
-        }
-        res.json(object);
-    });
     }
 });
 
