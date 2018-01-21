@@ -110,32 +110,28 @@ router.put('/object/:id', function(req, res, next){
 // Update Task
 router.put('/object/:id/sportsfields', function(req, res, next){
     var sportsfield = req.body;
-    var updObject = {};
     sportsfield.objectId = req.params.id;
-    // if(sportsfield.name){
-    //     updObject.name = sportsfield.name;
-    // }
-    // if(sportsfield.dates){
-    //     updObject.dates = sportsfield.dates;
-    // }
-    // if(sportsfield.typeName){
-    //     updObject.typeName = sportsfield.typeName;
-    // }
-    // if(sportsfield.typeDisplayName){
-    //     updObject.typeDisplayName = sportsfield.typeDisplayName;
-    //}
     if(!(sportsfield.objectId) || !(sportsfield.name) || !(sportsfield["display-name"])){
         res.status(400);
         res.json({
             "error":"Bad Data"
         });
     } else {
+<<<<<<< HEAD
         db.sportsfields.save(sportsfield, function(err, sportsfield){
             if(err){
                 res.send(err);
             }
         res.json(sportsfield);
         });
+=======
+        db.objects.update({_id: mongojs.ObjectId(req.params.id)},{$push:{sportsfields:sportsfield}},{}, function(err, object){
+        if(err){
+            res.send(err);
+        }
+        res.json(object);
+    });
+>>>>>>> aee17dddd424cdb662afb47c6e3ad03c60aac70e
     }
 });
 
