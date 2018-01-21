@@ -43,4 +43,11 @@ getSportfieldsTypes(){
   })
 }
 
+addSportsfieldToObject(id,type){
+  return this.http.put('http://localhost:3000/api/object/'+id+'/sportsfields',type)
+    .map(res=>{
+      console.log(res);
+      res.json()});
+}
+
 }

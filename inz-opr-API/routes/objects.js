@@ -111,7 +111,7 @@ router.put('/object/:id', function(req, res, next){
 router.put('/object/:id/sportsfields', function(req, res, next){
     var sportsfield = req.body;
     var updObject = {};
-    
+    sportsfield.objectId = req.params.id;
     // if(sportsfield.name){
     //     updObject.name = sportsfield.name;
     // }
@@ -124,7 +124,7 @@ router.put('/object/:id/sportsfields', function(req, res, next){
     // if(sportsfield.typeDisplayName){
     //     updObject.typeDisplayName = sportsfield.typeDisplayName;
     //}
-    if(!sportsfield.name || !(sportsfield.objectId) || !(sportsfield.dates) || !(sportsfield.typeName) || !(sportsfield.typeDisplayName)){
+    if(!(sportsfield.objectId) || !(sportsfield.name) || !(sportsfield["display-name"])){
         res.status(400);
         res.json({
             "error":"Bad Data"
@@ -134,7 +134,7 @@ router.put('/object/:id/sportsfields', function(req, res, next){
             if(err){
                 res.send(err);
             }
-            res.json(sportsfield);
+        res.json(sportsfield);
         });
         db.objects.update({_id: mongojs.ObjectId(req.params.objectId)},{$push:{sportsfields:sportsfield}}, function(err, object){
         if(err){
