@@ -31,4 +31,9 @@ export class UserService{
         return this.http.put('http://localhost:3000/api/user/'+user._id, JSON.stringify(user), {headers: headers})
             .map(res => res.json());
     }
+
+    login(user,password){
+        return this.http.get('http://localhost:3000/api/user/find/'+user+'/'+password)
+            .map(res=>res.json())
+    }
 }

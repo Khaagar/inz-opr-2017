@@ -20,12 +20,15 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "./app/shared/font-awesome/fa-svg-with-js.css",        
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.js",
+        "./app/shared/font-awesome/fontawesome-all.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

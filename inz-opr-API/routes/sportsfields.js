@@ -54,7 +54,7 @@ router.get('/sportsfield/:id', function(req, res, next){
 router.post('/sportsfield', function(req, res, next){
     var sportsfield = req.body;
     console.log(req.body);
-    if(!sportsfield.name || !(sportsfield.objectId) || !(sportsfield.type["display-name"])){
+    if(!sportsfield.name || !(sportsfield.objectId) || !(sportsfield["display-name"])){
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -77,7 +77,7 @@ router.delete('/sportsfield/:id', function(req, res, next){
         if(err){
             res.send(err);
         }
-        res.json(sportsfields);
+        res.json(sportsfield);
     });
 });
 

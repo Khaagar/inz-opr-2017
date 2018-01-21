@@ -30,17 +30,17 @@ router.get('/user/find/:name/:password', function(req, res, next){
             if(user.password === req.params.password)
             {
                 res.json({
-                    type:object,
+                    type:"object",
                     object:user});
             }
             else {
                 res.json({
-                    type:error,
+                    type:"error",
                     object:'podane haslo jest bledne'});
             }
         }
         else {res.json({
-            type:object,
+            type:"error",
             object:'uzytkownik nie istnieje'});}
         
     });

@@ -78,25 +78,24 @@ export class OrlicConfigurationComponent implements OnInit {
   }
   
   dodajBoiskoDoOrlika(id,type){
-    console.log('ID ORLIKA ',id );
-    console.log('TYP BOISKA ',type );
-    
-    this.orlikService.addSportsfieldToObject(id,type)
-      .subscribe(data=>{
-        console.log('data',data);
-        var index = this.orliks.findIndex(x=>x._id === id);
-        var orlik = this.orliks[index];
-        orlik.sportsfields.push(data);
-        console.log(orlik);
-        
-        this.orlikService.updateStatus(orlik);
-      });
+    type._id = null;
+    type.objectId = id;
+    this.orlikService.addSportsfield(type)
+      .subscribe(res=>{
+        var index = this.orliks.findIndex(x=>x._id===id);
+        this.orliks[index].sportsfields.push(res);
+      })
 
   }
 
   usunBoiskoDoOrlika(orlik,type){
+    console.log(type);
+    this.orlikService.deleteSportsfield(type._id)
+    .subscribe(data=>{});
     let index = this.orliks.findIndex(x=>x._id===orlik._id);
     this.orliks[index].sportsfields.splice(this.orliks[index].sportsfields.findIndex(x=>x._id===type._id),1);
+
+
     
   }
 

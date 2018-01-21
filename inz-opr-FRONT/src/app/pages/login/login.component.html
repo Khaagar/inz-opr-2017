@@ -1,10 +1,10 @@
 <form class="well">
     <form class="form-group">
-      <input type="text" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Add name...">
-      <input type="text" [(ngModel)]="user.surname" name="surname" class="form-control" placeholder="Add surname...">
-      <input type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Add email..."> 
-      <input type="text" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Add password...">
-      <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control" placeholder="Add phone...">
+      <input type="text" [(ngModel)]="user.name" name="name" class="form-control my-2" placeholder="Imię">
+      <input type="text" [(ngModel)]="user.surname" name="surname" class="form-control my-2" placeholder="Nazwisko">
+      <input type="text" [(ngModel)]="user.email" name="email" class="form-control my-2" placeholder="E-mail"> 
+      <input type="password" [(ngModel)]="user.password" name="password" class="form-control my-2" placeholder="Hasło">
+      <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control my-2" placeholder="Telefon">
       <button type="submit" (click)="addUser(user)"class="btn btn-primary text-uppercase">Zarejestruj</button>          
     </form>  
 </form>

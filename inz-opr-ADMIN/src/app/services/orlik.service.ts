@@ -46,8 +46,20 @@ getSportfieldsTypes(){
 addSportsfieldToObject(id,type){
   return this.http.put('http://localhost:3000/api/object/'+id+'/sportsfields',type)
     .map(res=>{
+      console.log(res.json());
       res.json()
     });
+}
+addSportsfield(type){
+  return this.http.post('http://localhost:3000/api/sportsfield',type)
+    .map(res=>{
+      console.log('res',res.json())
+      return res.json();
+    })
+}
+deleteSportsfield(id){
+  return this.http.delete('http://localhost:3000/api/sportsfield/'+id)
+    .map(res=>res.json());
 }
 
 }

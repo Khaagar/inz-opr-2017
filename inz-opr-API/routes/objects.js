@@ -117,21 +117,13 @@ router.put('/object/:id/sportsfields', function(req, res, next){
             "error":"Bad Data"
         });
     } else {
-<<<<<<< HEAD
-        db.sportsfields.save(sportsfield, function(err, sportsfield){
-            if(err){
-                res.send(err);
-            }
-        res.json(sportsfield);
-        });
-=======
         db.objects.update({_id: mongojs.ObjectId(req.params.id)},{$push:{sportsfields:sportsfield}},{}, function(err, object){
         if(err){
             res.send(err);
         }
+        console.log('XYZ: ', object)
         res.json(object);
     });
->>>>>>> aee17dddd424cdb662afb47c6e3ad03c60aac70e
     }
 });
 
