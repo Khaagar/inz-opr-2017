@@ -21,12 +21,8 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-<<<<<<< HEAD
     "@fortawesome/fontawesome": "^1.1.2",
     "bootstrap": "^4.0.0-beta",
-=======
-    "bootstrap": "4.0.0-beta",
->>>>>>> 2744d7b2ff5c40e3c4a5b6acdd89c764e9c935f6
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "popper.js": "^1.12.5",
