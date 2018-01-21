@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" [routerLink]="['']">ORLIK FRONT</a>
+<a *ngIf="user2"class="navbar-brand" [routerLink]="['']">ORLIK FRONT</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
     aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,14 +9,11 @@
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['']">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" [routerLink]="['']">Disabled</a>
-      </li>
     </ul>
-    <button class="btn btn-info" data-toggle="modal" data-target="#loginModal">ZALOGUJ</button>
+    <span *ngIf="user2"class="text-white mx-1" >Witaj, {{user2.name}}</span>
+    <button *ngIf="!user2"class="btn btn-info mx-1" data-toggle="modal" data-target="#loginModal">ZALOGUJ</button>
+    <!--<a *ngIf="user2.isAdmin" class="btn btn-primary mx-1" href="//localhost:4300/"><i class="fa fa-cog"></i></a>-->
+    <button *ngIf="user2"class="btn btn-warning mx-1" (click)="wyloguj()" >WYLOGUJ</button>
   </div>
 </nav>
 
@@ -30,11 +27,11 @@
           </button>
         </div>
         <div class="modal-body">
-            <form class="form-group" (submit)="login(username,password)">
+            <form class="form-group" (submit)="login(username,userPassword)">
                 <input type="text" [(ngModel)]="username" name="name" class="form-control" placeholder="Login...">
               </form>  
               <form class="form-group">
-                <input type="password" [(ngModel)]="password"name="name" class="form-control" placeholder="Hasło...">
+                <input type="password" [(ngModel)]="userPassword"name="name" class="form-control" placeholder="Hasło...">
               </form>  
               <div class="row w-100">
                   <div class="col-6">
@@ -42,7 +39,7 @@
       
                   </div>
                   <div class="col-6 py-2">
-                <button type="submit" class="btn btn-primary float-right" (click)="login(username,password)"data-dismiss="modal">ZALOGUJ</button>
+                <button type="submit" class="btn btn-primary float-right" (click)="login(username,userPassword)"data-dismiss="modal">ZALOGUJ</button>
                     
                     </div>
                 </div>
@@ -54,12 +51,22 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalLabel">{{modalMode.title}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" (click)="logowanie()" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-              <app-login></app-login>
+            <form class="well">
+              <form class="form-group">
+                <input type="text" [(ngModel)]="user.name" name="name" class="form-control my-2" placeholder="Imię">
+                <input type="text" [(ngModel)]="user.surname" name="surname" class="form-control my-2" placeholder="Nazwisko">
+                <input type="text" [(ngModel)]="user.email" name="email" class="form-control my-2" placeholder="E-mail"> 
+                <input type="password" [(ngModel)]="user.password" name="password" class="form-control my-2" placeholder="Hasło">
+                <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control my-2" placeholder="Telefon">
+                <button type="submit" (click)="addUser(user); logowanie()" class="btn btn-primary text-uppercase">Zarejestruj</button>          
+              </form>  
+          </form>
+          
           </div>
         </div>
       </div>

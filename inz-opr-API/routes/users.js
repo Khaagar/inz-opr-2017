@@ -29,9 +29,7 @@ router.get('/user/find/:name/:password', function(req, res, next){
         if(user){
             if(user.password === req.params.password)
             {
-                res.json({
-                    type:"object",
-                    object:user});
+                res.json(user);
             }
             else {
                 res.json({
@@ -84,6 +82,7 @@ router.post('/user', function(req, res, next){
             }
                 
             if(wynik) {
+                user.isAdmin=false;
                 db.users.save(user, function(err, user){
                     if(err){
                         res.send(err);

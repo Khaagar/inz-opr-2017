@@ -1,3 +1,4 @@
+import { WebStorageModule } from 'ngx-store';
 import { UsersComponent } from './components/users/users.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,8 +21,9 @@ import { LoginComponent } from './pages/login/login.component';
     LoginComponent
   ],
   imports: [
+    WebStorageModule,
     BrowserModule,
-    routes, HttpModule, FormsModule
+    routes, HttpModule, FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

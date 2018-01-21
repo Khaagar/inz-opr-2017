@@ -14,6 +14,17 @@ router.get('/reservations', function(req, res, next){
     });
 });
 
+
+// Get All Users
+router.get('/reservations/user/:id', function(req, res, next){
+    db.reservations.find({userId: req.params.id},function(err, reservations){
+        if(err){
+            res.send(err);
+        }
+        res.json(reservations);
+    });
+});
+
 // Get Single user
 router.get('/reservation/:id', function(req, res, next){
     db.reservations.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, reservation){
