@@ -10,6 +10,10 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { ObjectMapComponent } from './pages/object-map/object-map.component';
+import { NewsComponent } from './pages/news/news.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { LoginComponent } from './pages/login/login.component';
     HeaderComponent,
     FooterComponent,
     UsersComponent,
-    LoginComponent
+    LoginComponent,
+    ContactComponent,
+    ReservationsComponent,
+    ObjectMapComponent,
+    NewsComponent
   ],
   imports: [
     WebStorageModule,

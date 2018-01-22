@@ -1,4 +1,31 @@
-<div class="container">
-      <h1>MyUserList</h1>
-      <users></users>
+
+<div class="containr">
+<div class="row">
+  <div class="col-md-1">
+
+  </div>
+  <div class="col-md-10">
+    <ul class="nav nav-pills nav-justified mt-5" id="myTab" role="tablist">
+      <li class="nav-item ">
+        <a class="nav-link active" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="true">Aktualności</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="reservation-tab" data-toggle="tab" href="#reservation" role="tab" aria-controls="reservation" aria-selected="false">Rezerwacje</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="object-map-tab" data-toggle="tab" href="#object-map" role="tab" aria-controls="object-map-tab" aria-selected="false">Mapa obiektów</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Kontakt</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="news-tab"><app-news></app-news></div>
+      <div class="tab-pane fade" id="reservation" role="tabpanel" aria-labelledby="reservation-tab"><app-reservations></app-reservations></div>
+      <div class="tab-pane fade" id="object-map" role="tabpanel" aria-labelledby="object-map-tab"><app-object-map></app-object-map></div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><app-contact></app-contact></div>
+      
     </div>
+  </div>
+</div>
+</div>
