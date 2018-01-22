@@ -1,3 +1,33 @@
-<p>
-  reservations works!
-</p>
+<div class="row pt-3">
+  <div class="col-md-3">
+      <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="orlikDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Wybierz obiekt
+          </button>
+          <div class="dropdown-menu" aria-labelledby="orlikDropdown">
+            <a *ngFor="let orlik of orliks"class="dropdown-item" (click)="selectOrlik(orlik)">{{orlik.name}}</a>
+          </div>
+        </div>
+  </div>
+  <div class="col-md-3">
+      <div class="dropdown">
+          <button [disabled]="!selectedOrlik" class="btn btn-secondary dropdown-toggle" type="button" id="sportsfieldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Wybierz boisko
+          </button>
+          <div class="dropdown-menu" aria-labelledby="sportsfieldDropdown" *ngIf="selectedOrlik" >
+            <a *ngFor="let sportsfield of selectedOrlik.sportsfields"class="dropdown-item" (click)="selectSportsfield(sportsfield)">{{sportsfield["display-name"]}}</a>
+          </div>
+        </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-6 p-4">
+      <button [disabled]="selectedDay===today"class="btn btn-warning" (click)="prevDay()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      <span class="mx-5">{{selectedDay.stringDate}}</span>
+      <button class="btn btn-warning" (click)="nextDay()"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+            <h5>Status rezerwacji</h5>
+            <ul class="list-group w-100">
+              <li *ngFor="let item of openHours" class="list-group-item clearfix" ><span [class.text-success]="item.reservation.free" [class.text-danger]="!item.reservation.free" class="float-left">{{item.reservation.startHour+' - '+item.reservation.endHour+' '}}{{item.reservation.free? 'WOLNE':'ZAJETE'}}</span><button class="btn btn-sm btn-info float-right" (click)="usunBoiskoDoOrlika(orlik,boisko)">REZERWUJ</button></li>
+            </ul>
+    </div>
+  </div>
