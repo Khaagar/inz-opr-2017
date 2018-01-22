@@ -94,8 +94,6 @@ router.delete('/sportsfield/:id', function(req, res, next){
 router.put('/sportsfields/:id', function(req, res, next){
     var sportsfield = req.body;
     var updSportsfields = {};
-    
-    
     if(sportsfield.name){
         updSportsfields.name = sportsfield.name;
     }
@@ -112,8 +110,8 @@ router.put('/sportsfields/:id', function(req, res, next){
         updSportsfields.typeDisplayName = sportsfield.typeDisplayName;
     }
 
-    if(sportsfield.dates){
-        updSportsfields.dates = sportsfield.dates;
+    if(sportsfield.reservations){
+        updSportsfields.reservations = sportsfield.reservations;
     }
     
     if(!updSportsfields){
@@ -132,16 +130,17 @@ router.put('/sportsfields/:id', function(req, res, next){
 });
 
 // Update Task
-router.put('/sportsfield/:id/dates', function(req, res, next){
-    var date = req.body;
-    date.sportsfieldId = req.params.id;
-    if(!(date.sportsfieldId) || !(date.days)){
+router.put('/sportsfield/:id/:userid/reservations', function(req, res, next){
+    var reservation = req.body;
+    reservation.sportsfieldId = req.params.id;
+    reservation.userId = req.params.userid;
+    if(!(reservation)){
         res.status(400);
         res.json({
             "error":"Bad Data"
         });
     } else {
-        db.sportsfields.update({_id: mongojs.ObjectId(req.params.id)},{$push:{dates:date}},{}, function(err, object){
+        db.sportsfields.update({_id: mongojs.ObjectId(req.params.id)},{$push:{reservations:reservation}},{}, function(err, object){
         if(err){
             res.send(err);
         }
