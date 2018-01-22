@@ -9,8 +9,13 @@ export class SportsFieldService{
     }
     
     getSportsFields(){
-        return this.http.get('http://localhost:3000/api/sportsfield')
+        return this.http.get('http://localhost:3000/api/sportsfields')
             .map(res => res.json());
+    }
+
+    getSingleSportsField(id){
+        return this.http.get('http://localhost:3000/api/sportsfields/'+id)
+        .map(res => res.json());
     }
     
     addSportsField(newSportsField){
@@ -31,4 +36,6 @@ export class SportsFieldService{
         return this.http.put('http://localhost:3000/api/sportsfield/'+sportsfield._id, JSON.stringify(sportsfield), {headers: headers})
             .map(res => res.json());
     }
+
+    
 }

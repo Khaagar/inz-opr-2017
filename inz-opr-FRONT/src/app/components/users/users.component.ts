@@ -9,69 +9,31 @@ import {UserService} from '../../services/user.service';
 @Component({
   moduleId: module.id,
   selector: 'users',
-  templateUrl: 'users.component.html'
+  templateUrl: 'users.component.html',
+  providers:[SportsFieldService]
 })
 
 export class UsersComponent { 
     
-    users: User[];
-    name: string;
-    email: string;
-    password: string;
-    reservation_ids: string[];
-    user = {
-        _id:'',
-        name:'',
-        email:'',
-        password:'',
-        }
+    sportsfields: any;
+    currentSportsfield: any;
+    allDays:any;
+    currentDay:any;
+    allHours:any;
     
     
-    constructor(private userService:UserService){
-        this.userService.getUsers()
-            .subscribe(users => {
-                this.users = users;
+    
+    constructor(private sportsfieldService:SportsFieldService){
+        this.sportsfieldService.getSportsFields()
+            .subscribe(sportsfields => {
+                this.sportsfields = sportsfields[3].dates;
+                console.log(sportsfields.dates);
             });
     }
-    
-    addUser(user){
-        console.log(user);
-        this.userService.addUser(user);
-            
+
+    getAllDays(){
+         
     }
     
-    deleteUser(id){
-        var users = this.users;
-        
-        this.userService.deleteUser(id).subscribe(data => {
-            if(data.n == 1){
-                for(var i = 0;i < users.length;i++){
-                    if(users[i]._id == id){
-                        users.splice(i, 1);
-                    }
-                }
-            }
-        });
-    }
-    
-    sendToInput(user){
-        this.user = {
-            _id:user._id,
-            name: user.name,
-            email: user.email,
-            password:user.password
-        }
-    }
-    updateStatus(user){
-        var _user = {
-            _id:user._id,
-            name: user.name,
-            email: user.email,
-            password:user.password
-        };
-        
-        this.userService.updateStatus(_user).subscribe(data => {
-            user.name=user.name;
-        });
-    }
+   
 }

@@ -43,6 +43,18 @@ getSportfieldsTypes(){
   })
 }
 
+getDates(){
+  return this.http.get('http://localhost:3000/api/sportsfields/dateTemplate')
+  .map(res=>{
+    return res.json();
+  })
+}
+
+getSportsFields(){
+  return this.http.get('http://localhost:3000/api/sportsfield')
+      .map(res => res.json());
+}
+
 addSportsfieldToObject(id,type){
   return this.http.put('http://localhost:3000/api/object/'+id+'/sportsfields',type)
     .map(res=>{

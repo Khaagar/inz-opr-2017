@@ -32,31 +32,31 @@ router.get('/sportsfields/dateTemplate', function(req, res, next){
     });
 });
 
+// // Get Single user
+// router.get('/sportsfield/:id', function(req, res, next){
+//     db.sportsfields.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, sportsfield){
+//         if(err){
+//             res.send(err);
+//         }
+//         db.reservations.find({sportsfieldId:req.params.id},function(err,reservation){
+//             console.log(reservation);
+//             sportsfield.reservations=reservation;
+//             console.log(sportsfield);
+//             res.json(sportsfield);
+//         });
+//     });
+// });
+
+
 // Get Single user
 router.get('/sportsfield/:id', function(req, res, next){
     db.sportsfields.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, sportsfield){
         if(err){
             res.send(err);
         }
-        db.reservations.find({sportsfieldId:req.params.id},function(err,reservation){
-            console.log(reservation);
-            sportsfield.reservations=reservation;
-            console.log(sportsfield);
-            res.json(sportsfield);
-        });
+        res.json(sportsfield);
     });
 });
-
-
-// // Get Single user
-// router.get('/sportsfield/:id/name', function(req, res, next){
-//     db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
-//         if(err){
-//             res.send(err);
-//         }
-//         res.json(user.name);
-//     });
-// });
 
 
 //Save Task
@@ -127,6 +127,26 @@ router.put('/sportsfields/:id', function(req, res, next){
             res.send(err);
         }
         res.json(sportsfield);
+    });
+    }
+});
+
+// Update Task
+router.put('/sportsfield/:id/dates', function(req, res, next){
+    var date = req.body;
+    date.sportsfieldId = req.params.id;
+    if(!(date.sportsfieldId) || !(date.days)){
+        res.status(400);
+        res.json({
+            "error":"Bad Data"
+        });
+    } else {
+        db.sportsfields.update({_id: mongojs.ObjectId(req.params.id)},{$push:{dates:date}},{}, function(err, object){
+        if(err){
+            res.send(err);
+        }
+        console.log('XYZ: ', object)
+        res.json(object);
     });
     }
 });

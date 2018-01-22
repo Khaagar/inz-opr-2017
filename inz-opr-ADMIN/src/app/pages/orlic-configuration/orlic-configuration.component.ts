@@ -12,6 +12,8 @@ export class OrlicConfigurationComponent implements OnInit {
   orliks: any;
   orlik = {};
   typyBoisk: any;
+  dates:any;
+  sportsfields:any;
   constructor(private orlikService: OrlikService) { }
 
   ngOnInit() {
@@ -19,6 +21,8 @@ export class OrlicConfigurationComponent implements OnInit {
     setTimeout(function(){
       vm.getOrliks();
       vm.getBoiska();
+      vm.getSportsfields();
+      vm.getDates();
     },Math.random()*1300);
 
   }
@@ -29,7 +33,18 @@ export class OrlicConfigurationComponent implements OnInit {
         this.orliks.forEach(element => {
           if(!element.sportsfields){
             element.sportsfields = [];
+          }
+        });
+      })
+  }
 
+  getSportsfields() {
+    this.orlikService.getSportsFields()
+      .subscribe(sportsfields => {
+        this.sportsfields = sportsfields;
+        this.sportsfields.forEach(element => {
+          if(!element.dates){
+            element.dates = [];
           }
         });
       })
@@ -39,6 +54,13 @@ export class OrlicConfigurationComponent implements OnInit {
     this.orlikService.getSportfieldsTypes()
       .subscribe(types => {
         this.typyBoisk = types;
+      })
+  }
+
+  getDates(){
+    this.orlikService.getDates()
+      .subscribe(dates => {
+        this.dates = dates[0].days;
       })
   }
 
@@ -80,12 +102,21 @@ export class OrlicConfigurationComponent implements OnInit {
   dodajBoiskoDoOrlika(id,type){
     type._id = null;
     type.objectId = id;
+    type.dates=this.dates; //testing
     this.orlikService.addSportsfield(type)
       .subscribe(res=>{
         var index = this.orliks.findIndex(x=>x._id===id);
         this.orliks[index].sportsfields.push(res);
       })
+  }
 
+  dodajDatyDoBoiska(id,type){
+    type._id = null;
+    type.sportsfieldId = id;
+   
+    var index = this.sportsfields.findIndex(x=>x._id===id);
+    this.sportsfields[index].dates.push(this.dates);
+      
   }
 
   usunBoiskoDoOrlika(orlik,type){
