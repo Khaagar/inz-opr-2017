@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { OrlikService} from '../../services/orlik.service'
-
+import { ReservationService} from '../../services/reservation.service'
+import { SportsField } from '../../../models/SportsField';
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css'],
-  providers: [OrlikService]
+  providers: [OrlikService, ReservationService]
 })
 export class ReservationsComponent implements OnInit {
 
-  constructor(private orlikService: OrlikService) { }
+  constructor(private orlikService: OrlikService, private reservationService: ReservationService) { }
 
   orliks: any;
   selectedOrlik = null;
+  selectedSportsfield = null;
   today = {
     fullDate: this.setToday(),
     day: this.setToday().getDate(),
@@ -22,11 +24,10 @@ export class ReservationsComponent implements OnInit {
   }
   selectedDay = this.today;
   openHours = [];
+  user = JSON.parse(window.localStorage.getItem("ngx_user2"));
 
   ngOnInit() {
     this.getOrliks();
-    this.fillOpenHour();
-    console.log(this.openHours);
   }
 
   getOrliks(){
@@ -38,23 +39,31 @@ export class ReservationsComponent implements OnInit {
     selectOrlik(orlik){
       console.log(orlik);
       this.selectedOrlik = orlik;
+      this.selectedSportsfield = null;
+    }
+    selectSportsfield(sportsfield){
+      console.log(sportsfield);
+      this.selectedSportsfield = sportsfield;
+      this.fillOpenHour();
+      
     }
 
     fillOpenHour(){
       this.openHours = [];
       let startHour = 8
       let endHour = 22;
+      console.log(this.selectedSportsfield)
+      let sportsfieldReservations = this.selectedSportsfield?this.selectedSportsfield.reservations:null;
       for (let i = startHour+1; i<=endHour; i++){
         let hourStringSTART = (i-1)<10? "0"+(i-1) : (i-1);
         let hourStringEND = i<10? "0"+i : i;
-        this.openHours.push({
-          "reservation":{
-            "date": this.selectedDay.stringDate,
-            "startHour": hourStringSTART+":00",
-            "endHour": hourStringEND+":00",
-            "free":true
-          }
-        })
+        let reservationToPush = {
+          "date": this.selectedDay.stringDate,
+          "startHour": hourStringSTART+":00",
+          "endHour": hourStringEND+":00",
+          "free":true
+      }
+        this.openHours.push(reservationToPush);
       }
     }
 
@@ -97,5 +106,10 @@ export class ReservationsComponent implements OnInit {
       let tDay = new Date();
       tDay.setHours(0,0,0);
       return tDay;
+    }
+
+    saveReservation(reservation){
+      this.reservationService.saveReservation(this.selectedSportsfield._id,this.user._id,reservation)
+        .subscribe();
     }
 }

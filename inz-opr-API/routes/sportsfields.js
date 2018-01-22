@@ -62,6 +62,7 @@ router.get('/sportsfield/:id', function(req, res, next){
 //Save Task
 router.post('/sportsfield', function(req, res, next){
     var sportsfield = req.body;
+    sportsfield.reservations = [];
     console.log(req.body);
     if(!sportsfield.name || !(sportsfield.objectId) || !(sportsfield["display-name"])){
         res.status(400);
@@ -134,6 +135,8 @@ router.put('/sportsfield/:id/:userid/reservations', function(req, res, next){
     var reservation = req.body;
     reservation.sportsfieldId = req.params.id;
     reservation.userId = req.params.userid;
+    reservation.free = false;
+    console.log(reservation);
     if(!(reservation)){
         res.status(400);
         res.json({
