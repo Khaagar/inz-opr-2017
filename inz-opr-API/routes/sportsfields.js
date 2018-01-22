@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['sportsfields','reservations','sportsfieldsTypes']);
+var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['sportsfields','reservations','sportsfieldsTypes','dateTemplate']);
 
 
 // Get All Users
@@ -16,6 +16,15 @@ router.get('/sportsfields', function(req, res, next){
 
 router.get('/sportsfields/types', function(req, res, next){
     db.sportsfieldsTypes.find( function(err, sportsfields){
+        if(err){
+            res.send(err);
+        }
+        res.json(sportsfields);
+    });
+});
+
+router.get('/sportsfields/dateTemplate', function(req, res, next){
+    db.dateTemplate.find( function(err, sportsfields){
         if(err){
             res.send(err);
         }
