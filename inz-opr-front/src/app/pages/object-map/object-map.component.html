@@ -11,7 +11,7 @@
         </div>
   </div>
   <div class="col-md-6">
-      <agm-map style="width:400px; height:400px;"[latitude]="startLat" [longitude]="startLng">
+      <agm-map style="width:400px; height:400px;"[latitude]="startLat" [longitude]="startLng" [zoom]="15">
   
           <agm-marker *ngFor="let m of objectMap; let i = index"
               [latitude]="m.lat"

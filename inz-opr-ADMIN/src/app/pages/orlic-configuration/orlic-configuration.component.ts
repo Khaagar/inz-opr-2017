@@ -68,6 +68,7 @@ export class OrlicConfigurationComponent implements OnInit {
   }
 
   aktualizujOrlik(orlik){
+    console.log(orlik)
     this.orlikService.updateStatus(orlik).subscribe(data=>{
       orlik = data;
       var vm=this;

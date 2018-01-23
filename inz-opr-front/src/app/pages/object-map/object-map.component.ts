@@ -24,7 +24,6 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
   constructor(private orlikService: OrlikService, private mapsAPILoader:MapsAPILoader) {
     this.objectMap = [];
     this.mapsAPILoader.load().then(() => {
-      console.log('google script loaded');
       this.geocoder = new google.maps.Geocoder();
   });
    }
@@ -34,7 +33,7 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
       .subscribe(res=>{
          this.orliks= res;
          this.makeOrlikMap();
-        this.selectOrlik(this.orliks[0].lat, this.orliks[0].lng)
+        
       })
   }
   ngAfterViewChecked(){
@@ -47,20 +46,16 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
       var vm=this;
       let address=orlik.city+" "+orlik.street+" "+orlik.streetNumber;
       this.geocoder.geocode({"address":address},function(result, status){
-        console.log(result)
           var orlikDoMapy = {
             lat: result[0].geometry.location.lat(),
             lng: result[0].geometry.location.lng(),
             label: orlik.name,
             draggable: false
           }
-          console.log(orlikDoMapy);
           vm.objectMap.push(orlikDoMapy)
-          console.log(vm.objectMap)
           orlik.lat = orlikDoMapy.lat;
           orlik.lng = orlikDoMapy.lng;
-          
-        console.log(result)
+          vm.selectOrlik(orlik.lat,orlik.lng)
       })
     });
   }

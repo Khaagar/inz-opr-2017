@@ -92,6 +92,15 @@ router.put('/object/:id', function(req, res, next){
     if(object.sportsfields){
         updObject.sportsfields = object.sportsfields
     }
+    if(object.city){
+        updObject.city = object.city;
+    }
+    if(object.street){
+        updObject.street = object.street;
+    }
+    if(object.streetNumber){
+        updObject.streetNumber = object.streetNumber;
+    }
     if(!updObject){
         res.status(400);
         res.json({
