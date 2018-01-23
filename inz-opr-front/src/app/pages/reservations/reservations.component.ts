@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { OrlikService} from '../../services/orlik.service'
 import { ReservationService} from '../../services/reservation.service'
-import { SportsField } from '../../../models/SportsField';
+import { SportsFieldService} from '../../services/sportsfield.service'
+
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css'],
-  providers: [OrlikService, ReservationService]
+  providers: [OrlikService, ReservationService, SportsFieldService]
 })
 export class ReservationsComponent implements OnInit {
 
-  constructor(private orlikService: OrlikService, private reservationService: ReservationService) { }
+  constructor(private orlikService: OrlikService, private reservationService: ReservationService, private sportsfieldService: SportsFieldService) { }
 
   orliks: any;
   selectedOrlik = null;
@@ -41,11 +42,13 @@ export class ReservationsComponent implements OnInit {
       this.selectedOrlik = orlik;
       this.selectedSportsfield = null;
     }
+    
     selectSportsfield(sportsfield){
-      console.log(sportsfield);
-      this.selectedSportsfield = sportsfield;
-      this.fillOpenHour();
-      
+      this.sportsfieldService.getSingleSportsField(sportsfield._id)
+        .subscribe(res=>{
+          this.selectedSportsfield = res
+          this.fillOpenHour();
+        });
     }
 
     fillOpenHour(){
@@ -63,6 +66,8 @@ export class ReservationsComponent implements OnInit {
           "endHour": hourStringEND+":00",
           "free":true
       }
+      let reservationToEqual = sportsfieldReservations.find(x=>x.date===reservationToPush.date && x.startHour===reservationToPush.startHour && x.endHour ===reservationToPush.endHour);
+      reservationToPush = reservationToEqual? reservationToEqual : reservationToPush;
         this.openHours.push(reservationToPush);
       }
     }

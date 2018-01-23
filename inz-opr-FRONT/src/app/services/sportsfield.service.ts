@@ -14,7 +14,7 @@ export class SportsFieldService{
     }
 
     getSingleSportsField(id){
-        return this.http.get('http://localhost:3000/api/sportsfields/'+id)
+        return this.http.get('http://localhost:3000/api/sportsfield/'+id)
         .map(res => res.json());
     }
     
