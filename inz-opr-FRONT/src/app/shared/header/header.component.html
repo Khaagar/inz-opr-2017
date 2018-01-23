@@ -29,12 +29,12 @@
         <div class="modal-body">
             <form class="form-group" (submit)="login(username,userPassword)">
                 <input type="text" [(ngModel)]="username" name="name" class="form-control" placeholder="Login...">
-              </form>  
-              <form class="form-group">
+               
+              
                 <input type="password" [(ngModel)]="userPassword"name="name" class="form-control" placeholder="Hasło...">
-              </form>  
+               
               <div class="row w-100">
-                  <div class="col-6">
+                  <div class="col-6 py-2">
                       <span class="float-left">Nie masz jeszcze konta? <br/><a (click)="rejestracja()">Zarejestruj się</a></span>
       
                   </div>
@@ -43,6 +43,7 @@
                     
                     </div>
                 </div>
+              </form> 
         </div>
 
       </div>
