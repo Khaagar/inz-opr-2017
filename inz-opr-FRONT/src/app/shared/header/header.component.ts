@@ -4,6 +4,8 @@ import { UserService } from '../../services/user.service';
 import { User } from './../../../models/User';
 import {LocalStorage} from "ngx-store";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { LoggedUserService} from '../../services/logged-user.service'
+
 
 @Component({
   selector: 'app-header',
@@ -35,21 +37,22 @@ export class HeaderComponent implements OnInit {
     title:"Zaloguj się",
     button_title:"ZALOGUJ"
   }
+  loggedUser;
   @LocalStorage() username:String;
   @LocalStorage() userPassword:String;
   @LocalStorage() user2:any;
   @LocalStorage() userLogged:boolean;
-  constructor(private userService: UserService, public toastr: ToastsManager, vcr: ViewContainerRef) { 
-    //this.user2.isAdmin=false;
+  constructor(private userService: UserService, public toastr: ToastsManager, vcr: ViewContainerRef, private service:LoggedUserService) { 
+    this.service.dataChange.subscribe((data) => {
+      this.loggedUser = data;
+    });
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
-    console.log(this.modalMode);
   }
 
   addUser(user){
-    console.log(user);
     this.userService.addUser(user);   
   }
 
@@ -69,11 +72,12 @@ export class HeaderComponent implements OnInit {
     window.localStorage.removeItem('ngx_user2');
     window.localStorage.removeItem('ngx_userPassword');
     window.localStorage.removeItem('ngx_username');
-    window.localStorage.removeItem('ngx_userLogged');
+    window.localStorage.setItem('ngx_userLogged',"false");
     this.username='';
     this.userPassword='';
     this.user2=null;
     this.userLogged=false;
+    this.setLoggedUser('notlogged')
   }
 
   login(username,userPassword){
@@ -89,6 +93,9 @@ export class HeaderComponent implements OnInit {
         this.username=res.name;
         this.password=res.password;
         this.showSuccess();
+        this.setLoggedUser('logged');
+        window.localStorage.setItem('ngx_userLogged',"true");
+        
         }
       });
   }
@@ -101,4 +108,7 @@ export class HeaderComponent implements OnInit {
     this.toastr.error(error, 'Oops!');
   }
 
+  setLoggedUser(status) {
+    this.service.setData({ attr: status });
+  }
 }

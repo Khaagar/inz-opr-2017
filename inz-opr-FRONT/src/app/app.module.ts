@@ -17,6 +17,7 @@ import { NewsComponent } from './pages/news/news.component';
 import { AgmCoreModule } from '@agm/core';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoggedUserService} from './services/logged-user.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ContactComponent,
     ReservationsComponent,
     ObjectMapComponent,
-    NewsComponent
+    NewsComponent,
   ],
   imports: [
     WebStorageModule,
@@ -41,7 +42,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     }),
     ToastModule.forRoot(),
   ],
-  providers: [],
+  providers: [LoggedUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

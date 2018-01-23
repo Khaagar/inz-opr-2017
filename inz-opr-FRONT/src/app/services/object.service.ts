@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ObjectService{
     constructor(private http:Http){
-        console.log('Object Service Initialized...');
     }
     
     getObjects(){

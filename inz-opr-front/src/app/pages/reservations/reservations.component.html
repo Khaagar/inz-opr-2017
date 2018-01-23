@@ -1,11 +1,11 @@
-<div *ngIf="!user" class="row pt-3">
+<div *ngIf="!loggedUser || loggedUser.attr === 'notlogged'" class="row pt-3">
     <div class="col">
         <div class="alert alert-danger" role="alert">
             Musisz się zalogować, żeby korzystać z formularza rezerwacji!
           </div>
     </div>
 </div>
-<div *ngIf="user" class="container">
+<div *ngIf="loggedUser?.attr === 'logged'" class="container">
 <div class="row pt-5">
   <div class="col-md-4">
     <h5>Orlik:</h5>
