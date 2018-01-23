@@ -13,8 +13,15 @@ export class OrlikService {
       .map(res=>{
         return res.json();
       })
-      
   }
+
+  getOrlikByCity(city): Observable<any>{
+    return this.http.get('http://localhost:3000/api/objects/'+city)
+      .map(res=>{
+        return res.json();
+      })
+  }
+
 
   addOrlik(orlik){
     var headers = new Headers();

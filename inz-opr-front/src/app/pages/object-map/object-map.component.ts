@@ -3,7 +3,7 @@ import { MouseEvent } from '@agm/core';
 import { AgmMap, MapsAPILoader} from '@agm/core';
 import { OrlikService} from '../../services/orlik.service'
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
-
+import {LocalStorage} from "ngx-store";
 @Component({
   selector: 'app-object-map',
   templateUrl: './object-map.component.html',
@@ -20,8 +20,12 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
   startLng = 20.389;
 
   orliks;
+  wyniki;
+  cities;
   geocoder;
+  @LocalStorage() showAllOrliks : boolean;
   constructor(private orlikService: OrlikService, private mapsAPILoader:MapsAPILoader) {
+    this.showAllOrliks=true;
     this.objectMap = [];
     this.mapsAPILoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder();
@@ -32,17 +36,28 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
     this.orlikService.getAllOrliks()
       .subscribe(res=>{
          this.orliks= res;
-         this.makeOrlikMap();
+         this.makeOrlikMap(this.orliks);
         
       })
+      this.showAllOrliks=true;
   }
   ngAfterViewChecked(){
     this.agmMap.triggerResize();
   }
 
-  makeOrlikMap(){
+  searchByCity(city){
+    this.orlikService.getOrlikByCity(city)
+    .subscribe(res=>{
+      this.wyniki=res;
+      this.makeOrlikMap(this.wyniki);
+      console.log(this.wyniki);
+      this.showAllOrliks=false;
+    })
+  }
 
-    this.orliks.forEach(orlik => {
+  makeOrlikMap(orliks){
+
+    orliks.forEach(orlik => {
       var vm=this;
       let address=orlik.city+" "+orlik.street+" "+orlik.streetNumber;
       this.geocoder.geocode({"address":address},function(result, status){

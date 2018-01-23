@@ -5,6 +5,25 @@ var db = mongojs('mongodb://admin:admin@ds247007.mlab.com:47007/inz-opr', ['obje
 
 
 // Get All Users
+router.get('/objects/cities', function(req, res, next){
+    db.objects.find({},{city:1},function(err, objects){
+        if(err){
+            res.send(err);
+        }
+        res.json(objects);
+    });
+});
+
+// Get All Users
+router.get('/objects/:city', function(req, res, next){
+    db.objects.find({city:req.params.city},function(err, objects){
+        if(err){
+            res.send(err);
+        }
+        res.json(objects);
+    });
+});
+
 router.get('/objects', function(req, res, next){
     db.objects.find(function(err, objects){
         if(err){

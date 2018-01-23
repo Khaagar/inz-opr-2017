@@ -1,15 +1,38 @@
-<div class="row pt-3">
-  <div class="col-md-6">
-      <div *ngFor="let orlik of orliks" class="card border-primary mb-3 w-100">
-          <div class="card-header d-flex justify-content-between">{{orlik.name}}<button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button></div>
-          <div class="card-body text-default">
-            <p class="card-text">Miasto</p>
-            <h5 class="card-title">{{orlik.city}}</h5>
-            <p class="card-text">Ulica</p>
-            <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+<form class="well">
+    <form class="form-group">
+      <input type="text" [(ngModel)]="city" name="phone" class="form-control my-2" placeholder="Wpisz nazwę miasta">
+      <button type="submit" (click)="searchByCity(city)"class="btn btn-primary text-uppercase">Wyszukaj</button>          
+    </form>  
+</form>
+
+<div *ngIf="showAllOrliks" class="row pt-3"><div class="col-md-6">
+    <div >
+        <div *ngFor="let orlik of orliks" class="card border-primary mb-3 w-100">
+            <div class="card-header d-flex justify-content-between">{{orlik.name}}<button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button></div>
+            <div class="card-body text-default">
+              <p class="card-text">Miasto</p>
+              <h5 class="card-title">{{orlik.city}}</h5>
+              <p class="card-text">Ulica</p>
+              <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+            </div>
           </div>
-        </div>
-  </div>
+    </div></div>
+</div>
+<div *ngIf="!showAllOrliks" class="row pt-3"><div class="col-md-6">
+    <div >
+        <div *ngFor="let orlik of wyniki" class="card border-primary mb-3 w-100">
+            <div class="card-header d-flex justify-content-between">{{orlik.name}}<button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button></div>
+            <div class="card-body text-default">
+              <p class="card-text">Miasto</p>
+              <h5 class="card-title">{{orlik.city}}</h5>
+              <p class="card-text">Ulica</p>
+              <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+            </div>
+          </div>
+    </div></div>
+    </div>
+
+
   <div class="col-md-6">
       <agm-map style="width:400px; height:400px;"[latitude]="startLat" [longitude]="startLng" [zoom]="15">
   
@@ -27,4 +50,4 @@
         
         </agm-map>
     </div>
-</div>
+
