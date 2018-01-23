@@ -34,12 +34,12 @@ router.get('/user/find/:name/:password', function(req, res, next){
             else {
                 res.json({
                     type:"error",
-                    object:'podane haslo jest bledne'});
+                    object:'Podane hasło jest błędne. Spróbuj jeszcze raz.'});
             }
         }
         else {res.json({
             type:"error",
-            object:'uzytkownik nie istnieje'});}
+            object:'Użytkownik o podanym loginie nie istnieje. Spróbuj jeszcze raz.'});}
         
     });
 });

@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   @LocalStorage() username:String;
   @LocalStorage() userPassword:String;
   @LocalStorage() user2:any;
-  @LocalStorage() user3:String;
+  @LocalStorage() userLogged:boolean;
   constructor(private userService: UserService) { 
     this.liczbaWyswietlen++;
     //this.user2.isAdmin=false;
@@ -67,9 +67,11 @@ export class HeaderComponent implements OnInit {
     window.localStorage.removeItem('ngx_user2');
     window.localStorage.removeItem('ngx_userPassword');
     window.localStorage.removeItem('ngx_username');
+    window.localStorage.removeItem('ngx_userLogged');
     this.username='';
     this.userPassword='';
     this.user2=null;
+    this.userLogged=false;
   }
 
   login(username,userPassword){
@@ -82,6 +84,7 @@ export class HeaderComponent implements OnInit {
         }
         else{
         this.user2=res;
+        this.userLogged=true;
         this.username=res.name;
         this.password=res.password;
         console.log(res);
