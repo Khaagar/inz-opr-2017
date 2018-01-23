@@ -14,6 +14,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { ObjectMapComponent } from './pages/object-map/object-map.component';
 import { NewsComponent } from './pages/news/news.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import { NewsComponent } from './pages/news/news.component';
     WebStorageModule,
     BrowserModule,
     routes, HttpModule, FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDBAJtoD3BOH-6fm15cuCUyJ04ixzDVuXw'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
