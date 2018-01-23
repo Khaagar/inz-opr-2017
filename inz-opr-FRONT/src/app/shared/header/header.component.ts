@@ -77,14 +77,14 @@ export class HeaderComponent implements OnInit {
     this.userService.login(username,userPassword)
       .subscribe(res=>{
         if(res.type==='error'){
-          window.alert(res);
+          window.alert(res.object);
           console.log(res);
         }
         else{
-          this.user2=res;
-          this.username=res.name;
-          this.password=res.password;
-          console.log(res);
+        this.user2=res;
+        this.username=res.name;
+        this.password=res.password;
+        console.log(res);
         }
       });
   }
