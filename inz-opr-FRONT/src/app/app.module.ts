@@ -14,6 +14,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { ObjectMapComponent } from './pages/object-map/object-map.component';
 import { NewsComponent } from './pages/news/news.component';
+import { AgmCoreModule } from '@agm/core';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -35,6 +36,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     routes, HttpModule, FormsModule,
     BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDBAJtoD3BOH-6fm15cuCUyJ04ixzDVuXw'
+    }),
     ToastModule.forRoot(),
   ],
   providers: [],
