@@ -54,6 +54,7 @@ export class HeaderComponent implements OnInit {
 
   addUser(user){
     this.userService.addUser(user);   
+    this.showSuccessRegister();
   }
 
   rejestracja(){
@@ -91,8 +92,9 @@ export class HeaderComponent implements OnInit {
         this.user2=res;
         this.userLogged=true;
         this.username=res.name;
+        this.surname=res.surname
         this.password=res.password;
-        this.showSuccess();
+        this.showSuccessLogin();
         this.setLoggedUser('logged');
         window.localStorage.setItem('ngx_userLogged',"true");
         
@@ -100,8 +102,12 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  showSuccess() {
-    this.toastr.success('Witaj, '+this.username+'!', 'Success!');
+  showSuccessLogin() {
+    this.toastr.success('Witaj, '+this.surname+'!', 'Success!');
+  }
+
+  showSuccessRegister() {
+    this.toastr.success('Pomyślnie zarejestrowano! Możesz się zalogować!', 'Success!');
   }
 
   showError(error) {

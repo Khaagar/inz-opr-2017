@@ -10,7 +10,7 @@
         <a class="nav-link" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <span *ngIf="user2"class="text-white mx-1" >Witaj, {{user2.name}}</span>
+    <span *ngIf="user2"class="text-white mx-1" >Witaj, {{user2.surname}}</span>
     <button *ngIf="!user2"class="btn btn-info mx-1" data-toggle="modal" data-target="#loginModal">ZALOGUJ</button>
     <div *ngIf="userLogged"><a *ngIf="user2.isAdmin" class="btn btn-primary mx-1" href="//localhost:4300/"><i class="fa fa-cog"></i></a></div>
     <button *ngIf="user2"class="btn btn-warning mx-1" (click)="wyloguj()" >WYLOGUJ</button>
@@ -35,7 +35,7 @@
                
               <div class="row w-100">
                   <div class="col-6 py-2">
-                      <span class="float-left">Nie masz jeszcze konta? <br/><a (click)="rejestracja()">Zarejestruj się</a></span>
+                      <span class="float-left">Nie masz jeszcze konta? <br/><a class="pointer" (click)="rejestracja()">Zarejestruj się</a></span>
       
                   </div>
                   <div class="col-6 py-2">
@@ -59,8 +59,8 @@
           <div class="modal-body">
             <form class="well">
               <form class="form-group">
-                <input type="text" [(ngModel)]="user.name" name="name" class="form-control my-2" placeholder="Imię">
-                <input type="text" [(ngModel)]="user.surname" name="surname" class="form-control my-2" placeholder="Nazwisko">
+                <input type="text" [(ngModel)]="user.name" name="name" class="form-control my-2" placeholder="Login">
+                <input type="text" [(ngModel)]="user.surname" name="surname" class="form-control my-2" placeholder="Imię i nazwisko">
                 <input type="text" [(ngModel)]="user.email" name="email" class="form-control my-2" placeholder="E-mail"> 
                 <input type="password" [(ngModel)]="user.password" name="password" class="form-control my-2" placeholder="Hasło">
                 <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control my-2" placeholder="Telefon">
