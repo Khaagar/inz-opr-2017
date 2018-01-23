@@ -15,6 +15,7 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { ObjectMapComponent } from './pages/object-map/object-map.component';
 import { NewsComponent } from './pages/news/news.component';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     WebStorageModule,
     BrowserModule,
     routes, HttpModule, FormsModule,
+    BrowserAnimationsModule,
     ToastModule.forRoot(),
   ],
   providers: [],

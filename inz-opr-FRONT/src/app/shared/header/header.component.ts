@@ -1,8 +1,10 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from './../../../models/User';
 import {LocalStorage} from "ngx-store";
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -37,9 +39,9 @@ export class HeaderComponent implements OnInit {
   @LocalStorage() userPassword:String;
   @LocalStorage() user2:any;
   @LocalStorage() userLogged:boolean;
-  constructor(private userService: UserService) { 
-    this.liczbaWyswietlen++;
+  constructor(private userService: UserService, public toastr: ToastsManager, vcr: ViewContainerRef) { 
     //this.user2.isAdmin=false;
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
@@ -79,17 +81,24 @@ export class HeaderComponent implements OnInit {
     this.userService.login(username,userPassword)
       .subscribe(res=>{
         if(res.type==='error'){
-          window.alert(res.object);
-          console.log(res);
+          this.showError(res.object);
         }
         else{
         this.user2=res;
         this.userLogged=true;
         this.username=res.name;
         this.password=res.password;
-        console.log(res);
+        this.showSuccess();
         }
       });
+  }
+
+  showSuccess() {
+    this.toastr.success('Witaj, '+this.username+'!', 'Success!');
+  }
+
+  showError(error) {
+    this.toastr.error(error, 'Oops!');
   }
 
 }
