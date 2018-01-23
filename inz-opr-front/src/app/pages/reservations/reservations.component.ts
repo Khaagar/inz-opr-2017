@@ -114,7 +114,12 @@ export class ReservationsComponent implements OnInit {
     }
 
     saveReservation(reservation){
+      var vm = this;
       this.reservationService.saveReservation(this.selectedSportsfield._id,this.user._id,reservation)
-        .subscribe();
+        .subscribe( res =>{
+          this.selectSportsfield(vm.selectedSportsfield)
+        }
+        );
+        
     }
 }

@@ -12,7 +12,7 @@
     </ul>
     <span *ngIf="user2"class="text-white mx-1" >Witaj, {{user2.name}}</span>
     <button *ngIf="!user2"class="btn btn-info mx-1" data-toggle="modal" data-target="#loginModal">ZALOGUJ</button>
-    <!--<a *ngIf="user2.isAdmin" class="btn btn-primary mx-1" href="//localhost:4300/"><i class="fa fa-cog"></i></a>-->
+    <div *ngIf="userLogged"><a *ngIf="user2.isAdmin" class="btn btn-primary mx-1" href="//localhost:4300/"><i class="fa fa-cog"></i></a></div>
     <button *ngIf="user2"class="btn btn-warning mx-1" (click)="wyloguj()" >WYLOGUJ</button>
   </div>
 </nav>

@@ -15,6 +15,7 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { ObjectMapComponent } from './pages/object-map/object-map.component';
 import { NewsComponent } from './pages/news/news.component';
 import { AgmCoreModule } from '@agm/core';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AgmCoreModule } from '@agm/core';
     routes, HttpModule, FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDBAJtoD3BOH-6fm15cuCUyJ04ixzDVuXw'
-    })
+    }),
+    ToastModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
