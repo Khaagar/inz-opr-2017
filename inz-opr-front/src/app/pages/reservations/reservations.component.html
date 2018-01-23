@@ -24,9 +24,9 @@
           <button [disabled]="!selectedOrlik" class="btn btn-info dropdown-toggle w-100" type="button" id="sportsfieldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{selectedSportsfield? selectedSportsfield["display-name"] : "Wybierz obiekt"}}
           </button>
-          <div class="dropdown-menu" aria-labelledby="sportsfieldDropdown" *ngIf="selectedOrlik" >
-            <a *ngFor="let sportsfield of selectedOrlik.sportsfields"class="dropdown-item" (click)="selectSportsfield(sportsfield)">{{sportsfield["display-name"]}}</a>
-          </div>
+          <ul id="orlik-list" class="dropdown-menu w-100" aria-labelledby="sportsfieldDropdown" style="max-height:200px; overflow-y:scroll;" *ngIf="selectedOrlik" >
+            <li *ngFor="let sportsfield of selectedOrlik.sportsfields"class="dropdown-item" (click)="selectSportsfield(sportsfield)">{{sportsfield["display-name"]}}</li>
+          </ul>
         </div>
   </div>
 </div>
