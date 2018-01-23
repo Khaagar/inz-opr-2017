@@ -13,9 +13,9 @@
           <button class="btn btn-info dropdown-toggle w-100" type="button" id="orlikDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            {{selectedOrlik? selectedOrlik.name : "Wybierz obiekt"}}
           </button>
-          <div class="dropdown-menu" aria-labelledby="orlikDropdown">
-            <a *ngFor="let orlik of orliks"class="dropdown-item" (click)="selectOrlik(orlik)">{{orlik.name}}</a>
-          </div>
+          <ul id="orlik-list" class="dropdown-menu" aria-labelledby="orlikDropdown" style="max-height:200px; overflow-y:scroll;">
+            <li *ngFor="let orlik of orliks"class="dropdown-item" (click)="selectOrlik(orlik)">{{orlik.name}}</li>
+          </ul>
         </div>
   </div>
   <div class="col-md-4 offset-md-1">
