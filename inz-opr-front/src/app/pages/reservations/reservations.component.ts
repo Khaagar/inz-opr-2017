@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrlikService} from '../../services/orlik.service'
 import { ReservationService} from '../../services/reservation.service'
 import { SportsFieldService} from '../../services/sportsfield.service'
-
+import { LoggedUserService } from '../../services/logged-user.service'
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
@@ -10,8 +10,13 @@ import { SportsFieldService} from '../../services/sportsfield.service'
   providers: [OrlikService, ReservationService, SportsFieldService]
 })
 export class ReservationsComponent implements OnInit {
-
-  constructor(private orlikService: OrlikService, private reservationService: ReservationService, private sportsfieldService: SportsFieldService) { }
+  loggedUser={};
+  constructor(private orlikService: OrlikService, private reservationService: ReservationService, private sportsfieldService: SportsFieldService, private service:LoggedUserService) {
+    this.loggedUser['attr'] = this.service.getData();
+    this.service.dataChange.subscribe((data) => {
+      this.loggedUser = data;
+    });
+   }
 
   orliks: any;
   selectedOrlik = null;
@@ -38,7 +43,6 @@ export class ReservationsComponent implements OnInit {
     })  }
 
     selectOrlik(orlik){
-      console.log(orlik);
       this.selectedOrlik = orlik;
       this.selectedSportsfield = null;
     }
@@ -55,7 +59,6 @@ export class ReservationsComponent implements OnInit {
       this.openHours = [];
       let startHour = 8
       let endHour = 22;
-      console.log(this.selectedSportsfield)
       let sportsfieldReservations = this.selectedSportsfield?this.selectedSportsfield.reservations:null;
       for (let i = startHour+1; i<=endHour; i++){
         let hourStringSTART = (i-1)<10? "0"+(i-1) : (i-1);
@@ -103,7 +106,6 @@ export class ReservationsComponent implements OnInit {
         stringDate: this.convertDateToString(nDay)
       }
       this.fillOpenHour();
-    console.log(this.openHours);
       
 
     }
