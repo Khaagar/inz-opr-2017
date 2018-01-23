@@ -27,7 +27,6 @@ export class UsersComponent {
         this.sportsfieldService.getSportsFields()
             .subscribe(sportsfields => {
                 this.sportsfields = sportsfields[3].dates;
-                console.log(sportsfields.dates);
             });
     }
 

@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService{
     constructor(private http:Http){
-        console.log('User Service Initialized...');
     }
     
     getUsers(){

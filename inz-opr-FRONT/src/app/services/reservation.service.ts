@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ReservationService{
     constructor(private http:Http){
-        console.log('Reservation Service Initialized...');
     }
     
     getReservations(){

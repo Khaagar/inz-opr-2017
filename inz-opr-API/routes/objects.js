@@ -50,7 +50,7 @@ router.get('/object/:id/name', function(req, res, next){
 router.post('/object', function(req, res, next){
     var object = req.body;
     console.log(req.body);
-    if(!object.name || !(object.city) || !(object.zipcode) || !(object.street) || !(object.longitude) || !(object.latitude)){
+    if(!object.name || !(object.city) || !(object.street) || !(object.streetNumber)){
         res.status(400);
         res.json({
             "error": "Bad Data"

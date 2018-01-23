@@ -71,8 +71,17 @@
           </div>
           <div class="modal-body">
               <form class="form-group">
-                  <input type="text" [(ngModel)]="orlik.name" name="name" class="form-control" placeholder="Add name...">
+                  <input type="text" [(ngModel)]="orlik.name" name="name" class="form-control" placeholder="Nazwa...">
                 </form>  
+                <form class="form-group">
+                    <input type="text" [(ngModel)]="orlik.city" name="name" class="form-control" placeholder="Miasto...">
+                  </form>  
+                  <form class="form-group">
+                      <input type="text" [(ngModel)]="orlik.street" name="name" class="form-control" placeholder="Ulica...">
+                    </form>  
+                    <form class="form-group">
+                        <input type="text" [(ngModel)]="orlik.streetNumber" name="name" class="form-control" placeholder="Nr budynku...">
+                    </form> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">ZAMKNIJ</button>

@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   addUser(user){
-    console.log(user);
     this.userService.addUser(user);
         
 }
