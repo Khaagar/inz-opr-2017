@@ -6,10 +6,11 @@
     </div>
 </div>
 <div *ngIf="user" class="container">
-<div class="row pt-3">
+<div class="row pt-5">
   <div class="col-md-4">
-      <div class="dropdown w-100">
-          <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="orlikDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <h5>Orlik:</h5>
+      <div class="dropdown w-100 pl-2">
+          <button class="btn btn-info dropdown-toggle w-100" type="button" id="orlikDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            {{selectedOrlik? selectedOrlik.name : "Wybierz obiekt"}}
           </button>
           <div class="dropdown-menu" aria-labelledby="orlikDropdown">
@@ -18,8 +19,9 @@
         </div>
   </div>
   <div class="col-md-4 offset-md-1">
-      <div class="dropdown w-100">
-          <button [disabled]="!selectedOrlik" class="btn btn-secondary dropdown-toggle w-100" type="button" id="sportsfieldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <h5>Boisko:</h5>
+      <div class="dropdown w-100 pl-2">
+          <button [disabled]="!selectedOrlik" class="btn btn-info dropdown-toggle w-100" type="button" id="sportsfieldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{selectedSportsfield? selectedSportsfield["display-name"] : "Wybierz obiekt"}}
           </button>
           <div class="dropdown-menu" aria-labelledby="sportsfieldDropdown" *ngIf="selectedOrlik" >
@@ -28,13 +30,16 @@
         </div>
   </div>
 </div>
-<div class="row">
+<div *ngIf="selectedSportsfield"class="row">
     <div class="col-md-6 p-4">
+    <h5>Status rezerwacji:</h5>
+    <div class=" w-100 pl-3 py-2 d-flex justify-content-between">
       <button [disabled]="selectedDay.stringDate===today.stringDate"class="btn btn-warning" (click)="prevDay()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
       <span class="mx-5">{{selectedDay.stringDate}}</span>
       <button [disabled]="selectedDay.day-today.day>5" class="btn btn-warning" (click)="nextDay()"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-            <h5>Status rezerwacji</h5>
-            <ul class="list-group w-100">
+    </div>  
+      
+            <ul id="reservation-list"class="list-group w-100 pl-3" style="max-height:300px; overflow-y:scroll;">
               <li *ngFor="let item of openHours" class="list-group-item clearfix" ><span [class.text-success]="item.free" [class.text-danger]="!item.free" class="float-left" >{{item.startHour+' - '+item.endHour+' '}}{{item.free? 'WOLNE':'ZAJETE'}}</span><button [disabled]="!selectedSportsfield" *ngIf="item.free" class="btn btn-sm btn-info float-right" (click)="saveReservation(item)">REZERWUJ</button></li>
             </ul>
     </div>

@@ -27,14 +27,18 @@ export class SportsFieldService{
     
     deleteSportsfield(id){
         return this.http.delete('http://localhost:3000/api/sportsfield/'+id)
-            .map(res => res.json());
+            .map(res => {
+                return res.json()
+            });
     }
     
     updateStatus(sportsfield){
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.put('http://localhost:3000/api/sportsfield/'+sportsfield._id, JSON.stringify(sportsfield), {headers: headers})
-            .map(res => res.json());
+            .map(res => {
+                return res.json()
+            });
     }
 
     

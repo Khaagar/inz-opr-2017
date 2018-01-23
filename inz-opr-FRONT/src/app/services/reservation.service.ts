@@ -36,6 +36,8 @@ export class ReservationService{
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.put('http://localhost:3000/api/sportsfield/'+sportsfieldId+'/'+userId+'/reservations/', reservation, {headers: headers})
-            .map(res => res.json());
+            .map(res => {
+                return res.json()
+            });
     }
 }
