@@ -1,57 +1,60 @@
 <div class="row">
-    <div class="col-md-12">
-        <form class="well">
-            <form class="form-group">
-                <input type="text" [(ngModel)]="city" name="phone" class="form-control my-2" placeholder="Wpisz nazwę miasta">
-                <button type="submit" (click)="searchByCity(city)" class="btn btn-primary text-uppercase">Wyszukaj</button>
+        <div class="col-md-12">
+                <agm-map class="w-100" style="height:400px;" [latitude]="startLat" [longitude]="startLng" [zoom]="15">
+            
+                    <agm-marker *ngFor="let m of objectMap; let i = index" [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="m.draggable">
+            
+                        <agm-info-window>
+                            <strong>{{m.label}}</strong>
+                        </agm-info-window>
+            
+            
+                    </agm-marker>
+            
+                </agm-map>
+            </div>
+</div>
+
+<div class="row">
+        <div class="col-md-12">
+            <form class="well">
+                <form class="form-group">
+                    <input type="text" [(ngModel)]="city" name="phone" class="form-control my-2" placeholder="Wpisz nazwę miasta">
+                    <button type="submit" (click)="searchByCity(city)" class="btn btn-primary text-uppercase">Wyszukaj</button>
+                </form>
             </form>
-        </form>
-    </div>
-</div>
-
-
-<div class="row pt-3">
-    <div *ngIf="showAllOrliks" class="col-md-6">
-        <div *ngFor="let orlik of orliks" class="card border-primary mb-3 w-100">
-            <div class="card-header d-flex justify-content-between">{{orlik.name}}
-                <button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button>
-            </div>
-            <div class="card-body text-default">
-                <p class="card-text">Miasto</p>
-                <h5 class="card-title">{{orlik.city}}</h5>
-                <p class="card-text">Ulica</p>
-                <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
-            </div>
         </div>
     </div>
 
-    <div *ngIf="!showAllOrliks" class="col-md-6">
-        <div>
-            <div *ngFor="let orlik of wyniki" class="card border-primary mb-3 w-100">
-                <div class="card-header d-flex justify-content-between">{{orlik.name}}
-                    <button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button>
-                </div>
-                <div class="card-body text-default">
-                    <p class="card-text">Miasto</p>
-                    <h5 class="card-title">{{orlik.city}}</h5>
-                    <p class="card-text">Ulica</p>
-                    <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+<div *ngIf="showAllOrliks" class="row pt-3">
+        <div  *ngFor="let orlik of orliks" class="col-md-6">
+                <div  class="card border-primary mb-3 w-100">
+                    <div class="card-header d-flex justify-content-between">{{orlik.name}}
+                        <button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button>
+                    </div>
+                    <div class="card-body text-default">
+                        <p class="card-text">Miasto</p>
+                        <h5 class="card-title">{{orlik.city}}</h5>
+                        <p class="card-text">Ulica</p>
+                        <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-<div class="col-md-6">
-    <agm-map class="w-100" style="height:400px;" [latitude]="startLat" [longitude]="startLng" [zoom]="15">
+            </div>
 
-        <agm-marker *ngFor="let m of objectMap; let i = index" [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="m.draggable">
+            <div *ngIf="!showAllOrliks" class="row pt-3">
+            <div  *ngFor="let orlik of wyniki" class="col-md-6">
+                    <div class="card border-primary mb-3 w-100">
+                            <div class="card-header d-flex justify-content-between">{{orlik.name}}
+                                <button class="btn btn-info pull-right" (click)="selectOrlik(orlik.lat, orlik.lng)">POKAŻ NA MAPIE</button>
+                            </div>
+                            <div class="card-body text-default">
+                                <p class="card-text">Miasto</p>
+                                <h5 class="card-title">{{orlik.city}}</h5>
+                                <p class="card-text">Ulica</p>
+                                <h5 class="card-title">{{orlik.street+' '+orlik.streetNumber}}</h5>
+                            </div>
+                        </div>
+                </div>
 
-            <agm-info-window>
-                <strong>{{m.label}}</strong>
-            </agm-info-window>
-
-
-        </agm-marker>
-
-    </agm-map>
-</div>
 </div>
