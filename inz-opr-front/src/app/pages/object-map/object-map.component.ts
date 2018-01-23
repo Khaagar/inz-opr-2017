@@ -45,7 +45,13 @@ export class ObjectMapComponent implements OnInit, AfterViewChecked {
     this.agmMap.triggerResize();
   }
 
-  searchByCity(city){
+  searchByCity(city: String){
+    let firstLetter = city.substr(0,1);
+    let rest = city.substr(1,city.length-1);
+    firstLetter = firstLetter.toUpperCase();
+    rest = rest.toLowerCase();
+    city=firstLetter+rest;
+    console.log(city);
     this.orlikService.getOrlikByCity(city)
     .subscribe(res=>{
       this.wyniki=res;
